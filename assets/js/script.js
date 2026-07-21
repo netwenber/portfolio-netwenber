@@ -5,6 +5,24 @@ const elementToggleFunc = function (elem) {
   elem.classList.toggle("active");
 };
 
+// Theme Toggle Functionality (Speedtest style)
+const themeBtn = document.querySelector("[data-theme-btn]");
+const savedTheme = localStorage.getItem("portfolio-theme") || "light";
+
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-theme");
+} else {
+  document.body.classList.remove("dark-theme");
+}
+
+if (themeBtn) {
+  themeBtn.addEventListener("click", function () {
+    document.body.classList.toggle("dark-theme");
+    const isDark = document.body.classList.contains("dark-theme");
+    localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+  });
+}
+
 // Sidebar variables & toggle functionality for mobile
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
@@ -143,18 +161,3 @@ for (let i = 0; i < navigationLinks.length; i++) {
     }
   });
 }
-
-// Liquid Glass Spotlight Effect on Cards
-document.addEventListener("mousemove", (e) => {
-  const cards = document.querySelectorAll(".content-card, .service-item, .project-item > a, .blog-post-item > a, .sidebar");
-  cards.forEach(card => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    
-    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-      card.style.setProperty("--mouse-x", `${x}px`);
-      card.style.setProperty("--mouse-y", `${y}px`);
-    }
-  });
-});
