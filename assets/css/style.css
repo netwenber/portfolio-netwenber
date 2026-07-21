@@ -128,26 +128,19 @@ body {
   position: relative;
   overflow-x: hidden;
   line-height: 1.6;
+  background-color: var(--md-sys-color-background);
+  transition: background-color var(--transition-expressive), color var(--transition-expressive);
 }
 
 /* Hide orbs for clean MD3 surface look */
-.ambient-bg {
+.ambient-bg,
+.top-accent-bar {
   display: none;
 }
 
 /*-----------------------------------*\
-  #MD3 TOP ACCENT BAR & TOP APP BAR
+  #MD3 TOP APP BAR
 \*-----------------------------------*/
-
-.top-accent-bar {
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(90deg, #6750a4 0%, #38bdf8 50%, #9eccae 100%);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 200;
-}
 
 .top-header {
   max-width: 1200px;

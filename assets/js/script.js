@@ -5,21 +5,27 @@ const elementToggleFunc = function (elem) {
   elem.classList.toggle("active");
 };
 
-// Theme Toggle Functionality (Speedtest style)
+// Theme Toggle Functionality
 const themeBtn = document.querySelector("[data-theme-btn]");
 const savedTheme = localStorage.getItem("portfolio-theme") || "light";
 
-if (savedTheme === "dark") {
-  document.body.classList.add("dark-theme");
-} else {
-  document.body.classList.remove("dark-theme");
-}
+const applyTheme = (isDark) => {
+  if (isDark) {
+    document.body.classList.add("dark-theme");
+    document.documentElement.classList.add("dark-theme");
+  } else {
+    document.body.classList.remove("dark-theme");
+    document.documentElement.classList.remove("dark-theme");
+  }
+};
+
+applyTheme(savedTheme === "dark");
 
 if (themeBtn) {
   themeBtn.addEventListener("click", function () {
-    document.body.classList.toggle("dark-theme");
-    const isDark = document.body.classList.contains("dark-theme");
-    localStorage.setItem("portfolio-theme", isDark ? "dark" : "light");
+    const isDarkNow = !document.body.classList.contains("dark-theme");
+    applyTheme(isDarkNow);
+    localStorage.setItem("portfolio-theme", isDarkNow ? "dark" : "light");
   });
 }
 
